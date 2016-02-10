@@ -17,6 +17,11 @@ function template_preprocess_views_view_custom_unformatted(&$variables) {
   $variables['default_row_class'] = !empty($options['default_row_class']);
   foreach ($rows as $id => $____row) {
     $variables['rows'][$id] = array();
+
+    $node = $____row['#node'];
+    $tabvalue = $node->get($options['grouping'])->getValue()[0]['value'];
+    $variables['rows'][$id]['tab'] = $tabvalue;
+
     $variables['rows'][$id]['content'] = $____row;
     $variables['rows'][$id]['attributes'] = new Attribute();
     if ($row_class = $view->style_plugin->getRowClass($id)) {
